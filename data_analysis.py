@@ -10,7 +10,7 @@ import seaborn as sns
 # --------------------------------
 # Load Dataset
 # --------------------------------
-file_path = "raw_data.csv"      # Change file name if needed
+file_path = "raw_data.csv"      
 
 try:
     df = pd.read_csv(file_path)
