@@ -1,0 +1,11 @@
+Name,Age,Gender,Salary,Department
+John,25,Male,50000,IT
+Alice,30,Female,60000,HR
+Bob,28,Male,55000,Finance
+Emma,35,Female,70000,Marketing
+David,,Male,65000,IT
+Sophia,29,Female,,HR
+John,25,Male,50000,IT
+Michael,45,Male,90000,Finance
+Olivia,32,Female,75000,Marketing
+James,40,Male,85000,IT

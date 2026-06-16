@@ -1,0 +1,9 @@
+Name,Age,Gender,Salary,Department
+John,25.0,Male,50000.0,IT
+Alice,30.0,Female,60000.0,HR
+Bob,28.0,Male,55000.0,Finance
+Emma,35.0,Female,70000.0,Marketing
+David,30.0,Male,65000.0,IT
+Sophia,29.0,Female,65000.0,HR
+Olivia,32.0,Female,75000.0,Marketing
+James,40.0,Male,85000.0,IT
