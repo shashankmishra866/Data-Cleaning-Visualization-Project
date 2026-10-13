@@ -37,19 +37,19 @@ print(df.isnull().sum())
 # --------------------------------
 # Handle Missing Values
 # --------------------------------
-print("\nHandling Missing Values...")
 
-# Fill numeric columns with median
-numeric_cols = df.select_dtypes(include=np.number).columns
+numerical_cols = df.select_dtypes(include="number").columns
 
-for col in numeric_cols:
-    df[col].fillna(df[col].median(), inplace=True)
+for col in numerical_cols:
+    df[col] = df[col].fillna(df[col].median())
 
-# Fill categorical columns with mode
-categorical_cols = df.select_dtypes(include="object").columns
+# Handle missing values in categorical columns
+categorical_cols = df.select_dtypes(exclude="number").columns
 
 for col in categorical_cols:
-    df[col].fillna(df[col].mode()[0], inplace=True)
+    if df[col].isnull().any():
+        df[col] = df[col].fillna(df[col].mode().iloc[0])
+
 
 # --------------------------------
 # Remove Duplicate Rows
@@ -67,7 +67,7 @@ print(f"\nDuplicates Removed: {duplicates_before - duplicates_after}")
 # --------------------------------
 print("\nRemoving Outliers...")
 
-for col in numeric_cols:
+for col in numerical_cols:
 
     Q1 = df[col].quantile(0.25)
     Q3 = df[col].quantile(0.75)
@@ -103,7 +103,7 @@ sns.set_style("whitegrid")
 # ======================================
 # Histogram for Numeric Features
 # ======================================
-for col in numeric_cols:
+for col in numerical_cols:
 
     plt.figure(figsize=(8,5))
 
@@ -120,7 +120,7 @@ for col in numeric_cols:
 # ======================================
 # Boxplots for Outlier Detection
 # ======================================
-for col in numeric_cols:
+for col in numerical_cols:
 
     plt.figure(figsize=(8,4))
 
@@ -135,7 +135,7 @@ for col in numeric_cols:
 # ======================================
 plt.figure(figsize=(10,8))
 
-correlation_matrix = df[numeric_cols].corr()
+correlation_matrix = df[numerical_cols].corr()
 
 sns.heatmap(
     correlation_matrix,
@@ -151,7 +151,7 @@ plt.show()
 # ======================================
 # Pair Plot
 # ======================================
-sns.pairplot(df[numeric_cols])
+sns.pairplot(df[numerical_cols])
 
 plt.show()
 
@@ -179,7 +179,7 @@ for col in categorical_cols:
 # ======================================
 print("\n====== Key Insights ======")
 
-for col in numeric_cols:
+for col in numerical_cols:
     print(f"{col}:")
     print(f"Mean = {df[col].mean():.2f}")
     print(f"Median = {df[col].median():.2f}")
